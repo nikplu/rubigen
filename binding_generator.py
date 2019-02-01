@@ -6,9 +6,10 @@ import pycparser
 from pycparser import c_ast, c_generator
 import io
 import ast_matchers as am
+import copy
 
 
-_func_decl_matcher = am.decl(am.func_decl().bind('func_decl'))
+_func_decl_matcher = am.decl(am.func_decl()).bind('decl')
 
 
 class Options(object):
@@ -48,23 +49,25 @@ def parse_into_ast(pp_source, options):
     return parser.parse(pp_source, options.input_file)
 
 
-def transform_to_func_ptr(d):
-    ptr_decl = c_ast.PtrDecl([], d)
-    typedef = c_ast.Typedef(d.type.declname, [], ['typedef'], ptr_decl)
+def transform_to_func_ptr(decl_of_func):
+    new_func_decl = copy.deepcopy(decl_of_func.type)
+    matcher = am.has_descendant(am.type_decl().bind('type_decl'))
+    def my_callback(type_decl):
+        type_decl.declname = 'PFN_{}'.format(type_decl.declname)
+    am.find_matches(new_func_decl, matcher, my_callback)
+    ptr_decl = c_ast.PtrDecl([], new_func_decl)
+    typedef = c_ast.Typedef('abc', [], ['typedef'], ptr_decl)
     return typedef
 
 
 def generate_bindings_from_ast(ast, options):
-    func_decls = []
-
-    def matcher_callback(func_decl):
-        func_decls.append(func_decl)
-    am.find_matches(ast, _func_decl_matcher, matcher_callback)
-
-    print(func_decls)
     gen = c_generator.CGenerator()
-    for f in func_decls:
-        print(gen.visit(transform_to_func_ptr(f)))
+
+    def matcher_callback(decl):
+        #print(decl)
+        print(gen.visit(transform_to_func_ptr(decl)))
+
+    am.find_matches(ast, _func_decl_matcher, matcher_callback)
 
 
 def generate_bindings(options):
