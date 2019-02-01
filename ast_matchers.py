@@ -230,5 +230,70 @@ def pragma(inner_matcher=None):
     return NodeMatcher(c_ast.Pragma, inner_matcher)
 
 
+class AllOfMatcher(object):
+    def __init__(self, inner_matchers):
+        self._inner_matchers = inner_matchers
+
+    def match(self, node, callback, active_bindings: dict):
+        temp_active_bindings = active_bindings.copy()
+        for matcher in self._inner_matchers:
+            path_matched = False
+
+            def matcher_callback(**active_bindings_):
+                nonlocal path_matched
+                nonlocal temp_active_bindings
+                path_matched = True
+                temp_active_bindings.update(active_bindings_)
+            matcher_active_bindings = {}
+            matcher.match(node, matcher_callback, matcher_active_bindings)
+            if not path_matched:
+                return
+
+        invoke_callback(callback, temp_active_bindings)
+
+
+def all_of(*args):
+    return AllOfMatcher(args)
+
+
+class HasNameMatcher(object):
+    def __init__(self, name):
+        self._name = name
+
+    def is_matching(self, node):
+        return node.name == self._name
+
+    def match(self, node, callback, active_bindings):
+        if self.is_matching(node):
+            invoke_callback(callback, active_bindings)
+
+
+def has_name(name):
+    return HasNameMatcher(name)
+
+
+class HasDescendantMatcher(object):
+    def __init__(self, inner_matcher):
+        self._inner_matcher = inner_matcher
+
+    def match(self, node, callback, active_bindings):
+        path_matched = False
+
+        def proxy_callback(**active_bindings_):
+            nonlocal path_matched
+            invoke_callback(callback ,active_bindings_)
+            path_matched = True
+        self._inner_matcher.match(node, proxy_callback, active_bindings)
+
+        if not path_matched:
+            for inner_node in node:
+                self.match(inner_node, proxy_callback, active_bindings)
+
+
+def has_descendant(inner_matcher):
+    return HasDescendantMatcher(inner_matcher)
+
+
+
 def find_matches(ast, matcher, callback):
     matcher.match(ast, callback, {})
