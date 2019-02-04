@@ -281,7 +281,7 @@ class HasDescendantMatcher(object):
 
         def proxy_callback(**active_bindings_):
             nonlocal path_matched
-            invoke_callback(callback ,active_bindings_)
+            invoke_callback(callback, active_bindings_)
             path_matched = True
         self._inner_matcher.match(node, proxy_callback, active_bindings)
 
@@ -293,6 +293,15 @@ class HasDescendantMatcher(object):
 def has_descendant(inner_matcher):
     return HasDescendantMatcher(inner_matcher)
 
+
+def find_nearest_type_decl(node):
+    cur_node = node
+    while hasattr(cur_node, 'type'):
+        if cur_node.__class__ == c_ast.TypeDecl:
+            return cur_node
+        else:
+            cur_node = cur_node.type
+    return None
 
 
 def find_matches(ast, matcher, callback):

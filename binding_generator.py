@@ -3,10 +3,9 @@
 from pcpp import Preprocessor
 import pycparser_fake_libc
 import pycparser
-from pycparser import c_ast, c_generator
 import io
 import ast_matchers as am
-import copy
+from generator_backend import GeneratorBackend, GeneratorEnvironment, BindableFunction
 
 
 _func_decl_matcher = am.decl(am.func_decl()).bind('decl')
@@ -15,6 +14,7 @@ _func_decl_matcher = am.decl(am.func_decl()).bind('decl')
 class Options(object):
     input_file = None
     output_directory = None
+    out_prefix = None
     include_paths = None
     pp_definitions = None
     show_ast = None
@@ -49,32 +49,25 @@ def parse_into_ast(pp_source, options):
     return parser.parse(pp_source, options.input_file)
 
 
-def transform_to_func_ptr(decl_of_func):
-    new_func_decl = copy.deepcopy(decl_of_func.type)
-    matcher = am.has_descendant(am.type_decl().bind('type_decl'))
-    def my_callback(type_decl):
-        type_decl.declname = 'PFN_{}'.format(type_decl.declname)
-    am.find_matches(new_func_decl, matcher, my_callback)
-    ptr_decl = c_ast.PtrDecl([], new_func_decl)
-    typedef = c_ast.Typedef('abc', [], ['typedef'], ptr_decl)
-    return typedef
+def generate_bindings_from_ast(ast, options, backend):
+    env = GeneratorEnvironment()
 
-
-def generate_bindings_from_ast(ast, options):
-    gen = c_generator.CGenerator()
+    functions = []
 
     def matcher_callback(decl):
-        #print(decl)
-        print(gen.visit(transform_to_func_ptr(decl)))
+        functions.append(BindableFunction(decl))
 
     am.find_matches(ast, _func_decl_matcher, matcher_callback)
 
+    env.functions = functions
 
-def generate_bindings(options):
-    print(options.__dict__)
+    backend.generate(options, env)
+
+
+def generate_bindings(options: Options, backend: GeneratorBackend):
     pp_source = preprocess(options)
-    print(pp_source)
+    #print(pp_source)
     ast = parse_into_ast(pp_source, options)
     if options.show_ast:
         ast.show()
-    generate_bindings_from_ast(ast, options)
+    generate_bindings_from_ast(ast, options, backend)
