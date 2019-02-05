@@ -30,6 +30,9 @@ def preprocess(options):
             d = d.replace('=', ' ', 1)
             pp.define(d)
 
+    # always parse the source as ISO C
+    pp.define('__STDC__ 1')
+
     if options.include_paths:
         for i in options.include_paths:
             pp.add_path(i)
@@ -66,7 +69,7 @@ def generate_bindings_from_ast(ast, options, backend):
 
 def generate_bindings(options: Options, backend: GeneratorBackend):
     pp_source = preprocess(options)
-    #print(pp_source)
+    print(pp_source)
     ast = parse_into_ast(pp_source, options)
     if options.show_ast:
         ast.show()
