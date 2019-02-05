@@ -39,11 +39,13 @@ class Jinja2GeneratorBackend(GeneratorBackend):
         self._render_template(self._source_template, template_context, out_path)
 
     def generate(self, options, env: GeneratorEnvironment):
+        input_file_basename = os.path.basename(options.input_file)
         header_path = os.path.join(options.output_directory, options.out_prefix + 'binding.h')
         source_path = os.path.join(options.output_directory, options.out_prefix + 'binding.c')
         header_rel_path = os.path.relpath(header_path, os.path.dirname(source_path))
         template_context = {
             'env': env,
+            'input_file_basename': input_file_basename,
             'header_path': header_path,
             'header_rel_path': header_rel_path,
             'source_path': source_path,
