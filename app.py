@@ -13,6 +13,9 @@ def main():
     parser.add_argument('out_prefix', help='The prefix for output files')
     parser.add_argument('-I', action='append', dest='include_paths', metavar='PATH', help='Add an include path')
     parser.add_argument(
+        '-include', action='append', dest='force_includes',
+        help='Force inclusion of the specified file at the top of the input file')
+    parser.add_argument(
         '-D', action='append', dest='pp_definitions', metavar='MACRO[=VAL]', help='Add a preprocessor definition')
     parser.add_argument('--show-ast', action='store_true')
     args = parser.parse_args()
@@ -21,6 +24,7 @@ def main():
     options.output_directory = args.output
     options.out_prefix = args.out_prefix
     options.include_paths = args.include_paths
+    options.force_includes = args.force_includes
     options.pp_definitions = args.pp_definitions
     options.show_ast = args.show_ast
     with open('templates/default_binding_header.h.j2', 'r') as f:

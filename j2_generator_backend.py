@@ -26,7 +26,8 @@ class Jinja2GeneratorBackend(GeneratorBackend):
         typedef = c_ast.Typedef(name, [], ['typedef'], ptr_decl)
         return typedef
 
-    def _render_template(self, template, template_context, out_path):
+    @staticmethod
+    def _render_template(template, template_context, out_path):
         with open(out_path, 'w') as f:
             f.write(template.render(template_context))
 
@@ -40,8 +41,9 @@ class Jinja2GeneratorBackend(GeneratorBackend):
 
     def generate(self, options, env: GeneratorEnvironment):
         input_file_basename = os.path.basename(options.input_file)
-        header_path = os.path.join(options.output_directory, options.out_prefix + 'binding.h')
-        source_path = os.path.join(options.output_directory, options.out_prefix + 'binding.c')
+        out_prefix = options.out_prefix
+        header_path = os.path.join(options.output_directory, out_prefix + 'binding.h')
+        source_path = os.path.join(options.output_directory, out_prefix + 'binding.c')
         header_rel_path = os.path.relpath(header_path, os.path.dirname(source_path))
         template_context = {
             'env': env,
@@ -49,9 +51,9 @@ class Jinja2GeneratorBackend(GeneratorBackend):
             'header_path': header_path,
             'header_rel_path': header_rel_path,
             'source_path': source_path,
+            'prefix': out_prefix,
             'c_from_typedef': self._c_from_typedef,
             'typedef_from_decl': self._typedef_from_decl
         }
         self._generate_header_file(template_context, header_path)
         self._generate_source_file(template_context, source_path)
-

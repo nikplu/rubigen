@@ -16,6 +16,7 @@ class Options(object):
     output_directory = None
     out_prefix = None
     include_paths = None
+    force_includes = None
     pp_definitions = None
     show_ast = None
 
@@ -38,8 +39,13 @@ def preprocess(options):
             pp.add_path(i)
     pp.add_path(pycparser_fake_libc.directory)
 
+    preamble = '#line 1 \"rubigen_preamble\"\n'
+    if options.force_includes:
+        for i in options.force_includes:
+            preamble += '#include \"{}\"\n'.format(i)
+
     with open(options.input_file) as f:
-        pp.parse(f)
+        pp.parse(preamble + '#line 1 \"{}\"'.format(f.name) + f.read(), source=f.name)
 
     mem_f = io.StringIO()
     pp.write(mem_f)
