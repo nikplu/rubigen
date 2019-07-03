@@ -39,13 +39,15 @@ def preprocess(options):
             pp.add_path(i)
     pp.add_path(pycparser_fake_libc.directory)
 
-    preamble = '#line 1 \"rubigen_preamble\"\n'
+    preamble = ''
     if options.force_includes:
+        preamble = '#line 1 \"rubigen_preamble\"\n'
         for i in options.force_includes:
             preamble += '#include \"{}\"\n'.format(i)
+        preamble += '#line 1 \"{}\"'.format(options.input_file)
 
     with open(options.input_file) as f:
-        pp.parse(preamble + '#line 1 \"{}\"'.format(f.name) + f.read(), source=f.name)
+        pp.parse(preamble + f.read(), source=f.name)
 
     mem_f = io.StringIO()
     pp.write(mem_f)
