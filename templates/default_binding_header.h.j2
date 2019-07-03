@@ -9,12 +9,12 @@
 {%- endfor %}
 
 // functions struct
-typedef struct {{ prefix }}functions_t
+typedef struct {{ ns }}_functions_t
 {
 {%- for function in env.functions %}
 	{{ 'PFN_' + function.decl.name }} {{ function.decl.name }};
 {%- endfor %}
-} {{ prefix }}functions;
+} {{ ns }}_functions;
 
 typedef struct rbg_library_t rbg_library;
-void {{ prefix }}load_funcs({{ prefix }}functions *f, rbg_library *lib);
+void {{ ns }}_load_funcs({{ ns }}_functions *f, rbg_library *lib);

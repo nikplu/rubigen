@@ -41,17 +41,17 @@ class Jinja2GeneratorBackend(GeneratorBackend):
 
     def generate(self, options, env: GeneratorEnvironment):
         input_file_basename = os.path.basename(options.input_file)
-        out_prefix = options.out_prefix
-        header_path = os.path.join(options.output_directory, out_prefix + 'binding.h')
-        source_path = os.path.join(options.output_directory, out_prefix + 'binding.c')
+        header_path = options.output_file_pattern.format(ext='.h')
+        source_path = options.output_file_pattern.format(ext='.c')
         header_rel_path = os.path.relpath(header_path, os.path.dirname(source_path))
+        ns = options.bindings_namespace
         template_context = {
             'env': env,
             'input_file_basename': input_file_basename,
             'header_path': header_path,
             'header_rel_path': header_rel_path,
             'source_path': source_path,
-            'prefix': out_prefix,
+            'ns': ns,
             'c_from_typedef': self._c_from_typedef,
             'typedef_from_decl': self._typedef_from_decl
         }

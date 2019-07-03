@@ -4,7 +4,7 @@
 
 extern void *rbg_get_sym(rbg_library *lib, const char *name);
 
-void {{ prefix }}load_funcs({{ prefix }}functions *f, rbg_library *lib)
+void {{ ns }}_load_funcs({{ ns }}_functions *f, rbg_library *lib)
 {
 {%- for function in env.functions %}
 	f->{{ function.decl.name }} = ({{ 'PFN_' + function.decl.name }})rbg_get_sym(lib, "{{ function.decl.name }}");

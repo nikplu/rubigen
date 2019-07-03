@@ -9,8 +9,8 @@ from jinja2 import Template
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('input', help='The path to the input file')
-    parser.add_argument('output', help='The path to the output directory')
-    parser.add_argument('out_prefix', help='The prefix for output files')
+    parser.add_argument('output_pattern', help='The pattern to generate the path to the output file')
+    parser.add_argument('namespace', help='The namespace the generated bindings should be put in')
     parser.add_argument('-I', action='append', dest='include_paths', metavar='PATH', help='Add an include path')
     parser.add_argument(
         '-include', action='append', dest='force_includes',
@@ -22,8 +22,8 @@ def main():
     args = parser.parse_args()
     options = binding_generator.Options()
     options.input_file = args.input
-    options.output_directory = args.output
-    options.out_prefix = args.out_prefix
+    options.output_file_pattern = args.output_pattern
+    options.bindings_namespace = args.namespace
     options.include_paths = args.include_paths
     options.force_includes = args.force_includes
     options.pp_definitions = args.pp_definitions

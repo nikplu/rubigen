@@ -13,8 +13,8 @@ _func_decl_matcher = am.decl(am.func_decl()).bind('decl')
 
 class Options(object):
     input_file = None
-    output_directory = None
-    out_prefix = None
+    output_file_pattern = None
+    bindings_namespace = None
     include_paths = None
     force_includes = None
     pp_definitions = None
