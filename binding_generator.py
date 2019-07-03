@@ -19,6 +19,7 @@ class Options(object):
     force_includes = None
     pp_definitions = None
     show_ast = None
+    show_preprocessed_source = None
 
 
 def preprocess(options):
@@ -77,7 +78,8 @@ def generate_bindings_from_ast(ast, options, backend):
 
 def generate_bindings(options: Options, backend: GeneratorBackend):
     pp_source = preprocess(options)
-    print(pp_source)
+    if options.show_preprocessed_source:
+        print(pp_source)
     ast = parse_into_ast(pp_source, options)
     if options.show_ast:
         ast.show()

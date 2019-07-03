@@ -18,6 +18,7 @@ def main():
     parser.add_argument(
         '-D', action='append', dest='pp_definitions', metavar='MACRO[=VAL]', help='Add a preprocessor definition')
     parser.add_argument('--show-ast', action='store_true')
+    parser.add_argument('--show-preprocessed-source', action='store_true')
     args = parser.parse_args()
     options = binding_generator.Options()
     options.input_file = args.input
@@ -27,6 +28,7 @@ def main():
     options.force_includes = args.force_includes
     options.pp_definitions = args.pp_definitions
     options.show_ast = args.show_ast
+    options.show_preprocessed_source = args.show_preprocessed_source
     with open('templates/default_binding_header.h.j2', 'r') as f:
         binding_header_template = f.read()
     with open('templates/default_binding_source.c.j2', 'r') as f:
