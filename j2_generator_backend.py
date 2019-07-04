@@ -45,6 +45,8 @@ class Jinja2GeneratorBackend(GeneratorBackend):
         source_path = options.output_file_pattern.format(ext='.c')
         header_rel_path = os.path.relpath(header_path, os.path.dirname(source_path))
         ns = options.bindings_namespace
+        force_includes = options.force_includes
+        pp_definitions = options.pp_definitions
         template_context = {
             'env': env,
             'input_file_basename': input_file_basename,
@@ -52,6 +54,8 @@ class Jinja2GeneratorBackend(GeneratorBackend):
             'header_rel_path': header_rel_path,
             'source_path': source_path,
             'ns': ns,
+            'force_includes': force_includes,
+            'pp_definitions': pp_definitions,
             'c_from_typedef': self._c_from_typedef,
             'typedef_from_decl': self._typedef_from_decl
         }
