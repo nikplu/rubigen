@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="3caa97da-8375-48c7-b5ea-7a8d32fde6f3" name="Default Changelist" comment="Add support for force includes + tweaking">
-      <change beforePath="$PROJECT_DIR$/binding_generator.py" beforeDir="false" afterPath="$PROJECT_DIR$/binding_generator.py" afterDir="false" />
+    <list default="true" id="3caa97da-8375-48c7-b5ea-7a8d32fde6f3" name="Default Changelist" comment="Template tweaking">
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -15,14 +16,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="299">
-              <caret line="31" column="65" lean-forward="true" selection-start-line="31" selection-start-column="65" selection-end-line="31" selection-end-column="65" />
-              <folding>
-                <element signature="e#24#39#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="947">
+              <caret line="63" column="45" selection-start-line="63" selection-start-column="45" selection-end-line="63" selection-end-column="45" />
             </state>
           </provider>
         </entry>
@@ -30,8 +28,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/binding_generator.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="748">
-              <caret line="49" selection-start-line="49" selection-end-line="49" />
+            <state relative-caret-position="1275">
+              <caret line="81" column="40" selection-start-line="81" selection-start-column="40" selection-end-line="81" selection-end-column="40" />
               <folding>
                 <element signature="e#24#53#0" expanded="true" />
               </folding>
@@ -39,13 +37,40 @@
           </provider>
         </entry>
       </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/templates/default_c_binding.h.j2">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="204">
+              <caret line="12" lean-forward="true" selection-start-line="12" selection-end-line="12" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/default_c_binding.c.j2">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="187">
+              <caret line="11" column="79" selection-start-line="11" selection-start-column="79" selection-end-line="11" selection-end-column="79" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/default_c_binding_common.j2">
+          <provider selected="true" editor-type-id="text-editor">
+            <state>
+              <caret column="34" selection-start-column="34" selection-end-column="34" />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/j2_generator_backend.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="816">
-              <caret line="53" column="13" selection-start-line="53" selection-start-column="13" selection-end-line="53" selection-end-column="13" />
+            <state relative-caret-position="850">
+              <caret line="56" selection-start-line="56" selection-end-line="56" />
               <folding>
-                <element signature="e#24#92#0" expanded="true" />
+                <element signature="e#24#35#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -62,25 +87,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>inner</find>
-      <find>(Node</find>
-      <find>callback</find>
-      <find>bind_stack</find>
-      <find>stack</find>
-      <find>compute</find>
-      <find>alisextension</find>
-      <find>ptrdecl</find>
-      <find>algetstring</find>
-      <find>print</find>
-      <find>func_typedefs</find>
-      <find>PFN_</find>
-      <find>pp_sour</find>
-      <find>WRITEDATA</find>
-      <find>writedata</find>
-      <find>fd_set</find>
-      <find>newtonjobtask</find>
-      <find>dfloat</find>
-      <find>float</find>
       <find>_Bool</find>
       <find>out_prefix</find>
       <find>NewtonImmediateModeConstraint</find>
@@ -91,6 +97,26 @@
       <find>force</find>
       <find>include</find>
       <find>__FILE__</find>
+      <find>generatorenvironment</find>
+      <find>options</find>
+      <find>template</find>
+      <find>ns</find>
+      <find>env.</find>
+      <find>jinja2</find>
+      <find>.render</find>
+      <find>dataclass</find>
+      <find>BindableFunction</find>
+      <find>output_file_pattern</find>
+      <find>header_rel</find>
+      <find>header</find>
+      <find>tag</find>
+      <find>output.template</find>
+      <find>get_tem</find>
+      <find>default</find>
+      <find>PFN</find>
+      <find>pFN_</find>
+      <find>function.</find>
+      <find>funcptr</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -102,19 +128,26 @@
       <list>
         <option value="$PROJECT_DIR$/matchers.py" />
         <option value="$PROJECT_DIR$/ast_matchers.py" />
-        <option value="$PROJECT_DIR$/generator_backend.py" />
         <option value="$PROJECT_DIR$/tests/data/simple_decl.h" />
-        <option value="$PROJECT_DIR$/j2_generator_backend.py" />
-        <option value="$PROJECT_DIR$/app.py" />
+        <option value="$PROJECT_DIR$/templates/default_binding_header.h.j2" />
         <option value="$PROJECT_DIR$/binding_generator.py" />
+        <option value="$PROJECT_DIR$/generator_backend.py" />
+        <option value="$PROJECT_DIR$/app.py" />
+        <option value="$PROJECT_DIR$/templates/default_binding.c.j2" />
+        <option value="$PROJECT_DIR$/templates/default_binding_common.j2" />
+        <option value="$PROJECT_DIR$/templates/default_binding.h.j2" />
+        <option value="$PROJECT_DIR$/j2_generator_backend.py" />
+        <option value="$PROJECT_DIR$/templates/default_c_binding_common.j2" />
+        <option value="$PROJECT_DIR$/templates/default_c_binding.h.j2" />
+        <option value="$PROJECT_DIR$/templates/default_c_binding.c.j2" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-8" />
-    <option name="y" value="-8" />
-    <option name="width" value="1031" />
-    <option name="height" value="725" />
+    <option name="x" value="-3852" />
+    <option name="y" value="-12" />
+    <option name="width" value="3864" />
+    <option name="height" value="2124" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -155,7 +188,7 @@
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="C:/msys64/usr/bin/git.exe" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
@@ -192,7 +225,7 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/app.py" />
-      <option name="PARAMETERS" value="" />
+      <option name="PARAMETERS" value="-ID:\branches\dbgvis-renderer-nextgen\dev\libraries\dbgvis\thirdparty\gl3w\include D:\branches\dbgvis-renderer-nextgen\dev\libraries\dbgvis\thirdparty\gl3w\include\GL\glcorearb.h glcore -DGL_GLEXT_PROTOTYPES=1 -oheader=glcore_binding.h=default_c_binding.h.j2 -osource=glcore_binding.c=default_c_binding.c.j2 --out-prefix=D:\branches\dbgvis-renderer-nextgen\dev\libraries\dbgvis\src\Bindings" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="false" />
@@ -233,6 +266,9 @@
       <workItem from="1551647712026" duration="6000" />
       <workItem from="1562177843146" duration="21000" />
       <workItem from="1562177936617" duration="742000" />
+      <workItem from="1562231760749" duration="1526000" />
+      <workItem from="1562236441986" duration="16610000" />
+      <workItem from="1562257104901" duration="530000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit">
       <created>1549044133828</created>
@@ -325,38 +361,82 @@
       <option name="project" value="LOCAL" />
       <updated>1549403149065</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="Include generation parameters in generated files">
+      <created>1562233269256</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1562233269256</updated>
+    </task>
+    <task id="LOCAL-00015" summary="Rework output generation">
+      <created>1562254863070</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1562254863070</updated>
+    </task>
+    <task id="LOCAL-00016" summary="Template tweaking">
+      <created>1562257628722</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1562257628722</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="43941000" />
+    <option name="totallyTimeSpent" value="62607000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <frame x="-3847" y="-7" width="2575" height="1415" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.23347548" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.23917362" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.32900432" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.4978678" weight="0.37053087" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.53794265" />
+      <window_info anchor="bottom" id="Find" order="1" sideWeight="0.49940404" weight="0.32866043" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49622566" visible="true" weight="0.3699377" />
+      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.49860945" weight="0.4524922" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" weight="0.328341" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
-      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.5021322" side_tool="true" weight="0.37053087" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="11" visible="true" weight="0.32936078" />
+      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.50377434" side_tool="true" weight="0.3699377" />
+      <window_info anchor="bottom" id="Terminal" order="11" weight="0.32866043" />
+      <window_info anchor="bottom" id="Python Console" order="12" weight="0.32969433" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="SciView" order="3" />
+      <window_info anchor="right" id="Database" order="4" weight="0.32975766" />
+    </layout>
+    <layout-to-restore>
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.23718713" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" sideWeight="0.49940404" weight="0.32866043" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49622566" visible="true" weight="0.3699377" />
+      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.49860945" weight="0.5373832" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" order="8" weight="0.328341" />
+      <window_info anchor="bottom" id="Database Changes" order="9" />
+      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.50377434" side_tool="true" visible="true" weight="0.3699377" />
+      <window_info anchor="bottom" id="Terminal" order="11" weight="0.32866043" />
       <window_info anchor="bottom" id="Python Console" order="12" weight="0.32969433" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="right" id="SciView" order="3" />
       <window_info anchor="right" id="Database" order="4" />
-    </layout>
+    </layout-to-restore>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
@@ -411,21 +491,13 @@
     <MESSAGE value="Tweak the header template" />
     <MESSAGE value="Always define __STDC__" />
     <MESSAGE value="Add support for force includes + tweaking" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add support for force includes + tweaking" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/binding_generator.py</url>
-          <line>36</line>
-          <option name="timeStamp" value="10" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <MESSAGE value="Include generation parameters in generated files" />
+    <MESSAGE value="Rework output generation" />
+    <MESSAGE value="Template tweaking" />
+    <option name="LAST_COMMIT_MESSAGE" value="Template tweaking" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/rubigen$app.coverage" NAME="app Coverage Results" MODIFIED="1562178171641" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/rubigen$app.coverage" NAME="app Coverage Results" MODIFIED="1562257350617" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
   <component name="debuggerHistoryManager">
     <expressions id="breakpointCondition">
@@ -466,16 +538,6 @@
     <entry file="file://$USER_HOME$/.virtualenvs/rubigen/Lib/site-packages/jinja2/runtime.py" />
     <entry file="file://$USER_HOME$/.virtualenvs/rubigen/Lib/site-packages/jinja2/asyncsupport.py" />
     <entry file="file://$USER_HOME$/.virtualenvs/rubigen/Lib/site-packages/jinja2/compiler.py" />
-    <entry file="file://$PROJECT_DIR$/generator_backend.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="16" column="30" selection-start-line="16" selection-start-column="30" selection-end-line="16" selection-end-column="30" />
-          <folding>
-            <element signature="e#24#51#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/.virtualenvs/rubigen/Lib/site-packages/jinja2/nativetypes.py" />
     <entry file="file://$PROJECT_DIR$/tests/data/al_binding.c" />
     <entry file="file://$PROJECT_DIR$/tests/data/al_binding.h" />
@@ -491,20 +553,41 @@
     <entry file="file://$USER_HOME$/.virtualenvs/rubigen/Lib/site-packages/pycparser/c_parser.py" />
     <entry file="file://$USER_HOME$/.virtualenvs/rubigen/Lib/site-packages/pycparser/plyparser.py" />
     <entry file="file://$USER_HOME$/.virtualenvs/rubigen/Lib/site-packages/pcpp/preprocessor.py" />
+    <entry file="file://$USER_HOME$/.virtualenvs/rubigen-Zz8wbrQO/Lib/site-packages/jinja2/filters.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="6681">
+          <caret line="404" selection-start-line="404" selection-end-line="404" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/.virtualenvs/rubigen-Zz8wbrQO/Lib/site-packages/jinja2/environment.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="261">
+          <caret line="809" column="8" selection-start-line="809" selection-start-column="8" selection-end-line="809" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/generator_backend.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="10" lean-forward="true" selection-start-line="10" selection-end-line="10" />
+          <folding>
+            <element signature="e#24#51#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="299">
-          <caret line="31" column="65" lean-forward="true" selection-start-line="31" selection-start-column="65" selection-end-line="31" selection-end-column="65" />
-          <folding>
-            <element signature="e#24#39#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="947">
+          <caret line="63" column="45" selection-start-line="63" selection-start-column="45" selection-end-line="63" selection-end-column="45" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/binding_generator.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="748">
-          <caret line="49" selection-start-line="49" selection-end-line="49" />
+        <state relative-caret-position="1275">
+          <caret line="81" column="40" selection-start-line="81" selection-start-column="40" selection-end-line="81" selection-end-column="40" />
           <folding>
             <element signature="e#24#53#0" expanded="true" />
           </folding>
@@ -513,11 +596,32 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/j2_generator_backend.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="816">
-          <caret line="53" column="13" selection-start-line="53" selection-start-column="13" selection-end-line="53" selection-end-column="13" />
+        <state relative-caret-position="850">
+          <caret line="56" selection-start-line="56" selection-end-line="56" />
           <folding>
-            <element signature="e#24#92#0" expanded="true" />
+            <element signature="e#24#35#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/default_c_binding_common.j2">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="34" selection-start-column="34" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/default_c_binding.c.j2">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="11" column="79" selection-start-line="11" selection-start-column="79" selection-end-line="11" selection-end-column="79" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/default_c_binding.h.j2">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="12" lean-forward="true" selection-start-line="12" selection-end-line="12" />
         </state>
       </provider>
     </entry>
