@@ -1,17 +1,26 @@
 #!/usr/bin/env python3
 
-from generator_backend import GeneratorBackend, GeneratorEnvironment
-from jinja2 import Template
-from pycparser import c_ast, c_generator
 import copy
 import ast_matchers as am
 import os
+from generator_backend import GeneratorBackend, GeneratorEnvironment
+from jinja2 import Environment
+from pycparser import c_ast, c_generator
+from dataclasses import dataclass
+
+
+@dataclass
+class Output:
+    name: str
+    output_path: str
+    template_name: str
 
 
 class Jinja2GeneratorBackend(GeneratorBackend):
-    def __init__(self, header_template: Template, source_template: Template):
-        self._header_template = header_template
-        self._source_template = source_template
+    def __init__(self, outputs: [Output], j2_env: Environment):
+        self._outputs = outputs
+        self._output_name_index = {x.name: x for x in self._outputs}  # type: {str: Output}
+        self._j2_env = j2_env
         self._c_generator = c_generator.CGenerator()
 
     def _c_from_typedef(self, func_typedef):
@@ -26,38 +35,39 @@ class Jinja2GeneratorBackend(GeneratorBackend):
         typedef = c_ast.Typedef(name, [], ['typedef'], ptr_decl)
         return typedef
 
-    @staticmethod
-    def _render_template(template, template_context, out_path):
+    def _render_template(self, template_name, template_context, out_path):
         with open(out_path, 'w') as f:
+            template = self._j2_env.get_template(template_name)
             f.write(template.render(template_context))
 
-    def _generate_header_file(self, template_context, out_path):
-        print('Writing header file to ' + out_path)
-        self._render_template(self._header_template, template_context, out_path)
+    def _rel_outpath(self, to_name: str, from_name: str):
+        to_path = self._output_name_index[to_name].output_path
+        from_path = self._output_name_index[from_name].output_path
+        from_dirname = os.path.dirname(from_path)
+        return os.path.relpath(to_path, from_dirname)
 
-    def _generate_source_file(self, template_context, out_path):
-        print('Writing source file to ' + out_path)
-        self._render_template(self._source_template, template_context, out_path)
+    @staticmethod
+    def _strip_prefix(text: str, prefix: str):
+        return text[len(prefix):] if text.startswith(prefix) else text
 
     def generate(self, options, env: GeneratorEnvironment):
+        self._j2_env.filters['stripprefix'] = self._strip_prefix
+        self._j2_env.filters['c_from_typedef'] = self._c_from_typedef
+        self._j2_env.filters['typedef_from_decl'] = self._typedef_from_decl
+
         input_file_basename = os.path.basename(options.input_file)
-        header_path = options.output_file_pattern.format(ext='.h')
-        source_path = options.output_file_pattern.format(ext='.c')
-        header_rel_path = os.path.relpath(header_path, os.path.dirname(source_path))
         ns = options.bindings_namespace
         force_includes = options.force_includes
         pp_definitions = options.pp_definitions
         template_context = {
             'env': env,
             'input_file_basename': input_file_basename,
-            'header_path': header_path,
-            'header_rel_path': header_rel_path,
-            'source_path': source_path,
             'ns': ns,
             'force_includes': force_includes,
-            'pp_definitions': pp_definitions,
-            'c_from_typedef': self._c_from_typedef,
-            'typedef_from_decl': self._typedef_from_decl
+            'pp_definitions': pp_definitions
         }
-        self._generate_header_file(template_context, header_path)
-        self._generate_source_file(template_context, source_path)
+
+        for output in self._outputs:
+            print('[{}] {} -> {}'.format(output.name, output.template_name, output.output_path))
+            template_context['rel_outpath'] = lambda x: self._rel_outpath(x, output.name)
+            self._render_template(output.template_name, template_context, output.output_path)

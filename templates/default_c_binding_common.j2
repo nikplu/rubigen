@@ -1,0 +1,7 @@
+{% macro funcptr_type(function) -%}
+PFN_{{ function.decl.name }}
+{%- endmacro %}
+
+{% macro structfunc(function) -%}
+{{ function.decl.name }}
+{%- endmacro %}

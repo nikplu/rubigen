@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 from pcpp import Preprocessor
+from dataclasses import dataclass
 import pycparser_fake_libc
 import pycparser
 import io
@@ -11,15 +12,15 @@ from generator_backend import GeneratorBackend, GeneratorEnvironment, BindableFu
 _func_decl_matcher = am.decl(am.func_decl()).bind('decl')
 
 
+@dataclass
 class Options(object):
-    input_file = None
-    output_file_pattern = None
-    bindings_namespace = None
-    include_paths = None
-    force_includes = None
-    pp_definitions = None
-    show_ast = None
-    show_preprocessed_source = None
+    input_file: str
+    bindings_namespace: str
+    include_paths: [str]
+    force_includes: [str]
+    pp_definitions: [str]
+    show_ast: bool
+    show_preprocessed_source: bool
 
 
 def preprocess(options):
