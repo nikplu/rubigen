@@ -18,7 +18,7 @@ extern "C" {
 /* typedefs */
 {%- block typedefs %}
 {%- for function in env.functions %}
-{{ function.decl|typedef_from_decl(common.funcptr_type(function))|c_from_typedef }};
+{{ function.decl|typedef_from_decl(common.funcptr_type(function, ns))|c_from_typedef }};
 {%- endfor %}
 {%- endblock %}
 
@@ -27,14 +27,14 @@ extern "C" {
 typedef struct {{ ns }}_functions_t
 {
 {%- for function in env.functions %}
-	{{ common.funcptr_type(function) }} {{ common.structfunc(function) }};
+	{{ common.funcptr_type(function, ns) }} {{ common.structfunc(function) }};
 {%- endfor %}
 } {{ ns }}_functions;
 {%- endblock %}
 
 {% block api -%}
 typedef void* (*PFN_rbg_get_sym)(void *user_arg, const char *name);
-void {{ ns }}_load_funcs({{ ns }}_functions *f, PFN_rbg_get_sym get_sym, void *user_arg);
+void {{ ns }}_load_functions({{ ns }}_functions *f, PFN_rbg_get_sym get_sym, void *user_arg);
 {%- endblock %}
 
 #ifdef __cplusplus

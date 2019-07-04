@@ -1,7 +1,7 @@
-{% macro funcptr_type(function) -%}
-PFN_{{ function.decl.name }}
+{% macro funcptr_type(function, ns) -%}
+PFN_{{ ns }}_{{ function.decl.name }}
 {%- endmacro %}
 
 {% macro structfunc(function) -%}
-{{ function.decl.name }}
+{{ function.decl.name|stripprefix('gl') }}
 {%- endmacro %}

@@ -6,10 +6,10 @@
 {%- endblock %}
 
 {% block impl -%}
-void {{ ns }}_load_funcs({{ ns }}_functions *f, PFN_rbg_get_sym get_sym, void *user_arg)
+void {{ ns }}_load_functions({{ ns }}_functions *f, PFN_rbg_get_sym get_sym, void *user_arg)
 {
 {%- for function in env.functions %}
-	f->{{ common.structfunc(function) }} = ({{ common.funcptr_type(function) }})get_sym(user_arg, "{{ function.decl.name }}");
+	f->{{ common.structfunc(function) }} = ({{ common.funcptr_type(function, ns) }})get_sym(user_arg, "{{ function.decl.name }}");
 {%- endfor %}
 }
 {%- endblock %}
