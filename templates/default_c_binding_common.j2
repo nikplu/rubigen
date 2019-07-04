@@ -3,5 +3,5 @@ PFN_{{ ns }}_{{ function.decl.name }}
 {%- endmacro %}
 
 {% macro structfunc(function) -%}
-{{ function.decl.name|stripprefix('gl') }}
+{{ function.decl.name }}
 {%- endmacro %}
