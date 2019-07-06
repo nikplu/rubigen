@@ -46,7 +46,7 @@ def preprocess(options):
         preamble = '#line 1 \"rubigen_preamble\"\n'
         for i in options.force_includes:
             preamble += '#include \"{}\"\n'.format(i)
-        preamble += '#line 1 \"{}\"'.format(options.input_file)
+        preamble += '#line 1 \"{}\"\n'.format(options.input_file)
 
     with open(options.input_file) as f:
         pp.parse(preamble + f.read(), source=f.name)
