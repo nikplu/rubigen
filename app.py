@@ -64,7 +64,7 @@ def _main():
             raise FatalCliError('no outputs')
 
         outputs = _parse_outputs(args.outputs, args.out_prefix)
-        binding_generator.generate_bindings(options, Jinja2GeneratorBackend(outputs, j2_env))
+        binding_generator.generate_bindings(options, Jinja2GeneratorBackend(outputs, j2_env, options.include_paths))
     except FatalCliError as e:
         print('fatal: ' + str(e))
         parser.print_help()

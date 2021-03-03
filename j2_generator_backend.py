@@ -3,6 +3,7 @@
 import copy
 import ast_matchers as am
 import os
+import pathlib
 from generator_backend import GeneratorBackend, GeneratorEnvironment
 from jinja2 import Environment
 from pycparser import c_ast, c_generator
@@ -17,11 +18,12 @@ class Output:
 
 
 class Jinja2GeneratorBackend(GeneratorBackend):
-    def __init__(self, outputs: [Output], j2_env: Environment):
+    def __init__(self, outputs: [Output], j2_env: Environment, include_paths):
         self._outputs = outputs
         self._output_name_index = {x.name: x for x in self._outputs}  # type: {str: Output}
         self._j2_env = j2_env
         self._c_generator = c_generator.CGenerator()
+        self._include_paths = include_paths
 
     def _c_from_typedef(self, func_typedef):
         return self._c_generator.visit(func_typedef)
@@ -43,8 +45,15 @@ class Jinja2GeneratorBackend(GeneratorBackend):
     def _rel_outpath(self, to_name: str, from_name: str):
         to_path = self._output_name_index[to_name].output_path
         from_path = self._output_name_index[from_name].output_path
+        for include_path in self._include_paths:
+            if pathlib.Path(include_path) in pathlib.Path(to_path).parents:
+                combined_path = pathlib.Path(to_path).relative_to(pathlib.Path(include_path))
+                return pathlib.PurePath(combined_path).as_posix()
+
         from_dirname = os.path.dirname(from_path)
-        return os.path.relpath(to_path, from_dirname)
+        rel_path = os.path.relpath(to_path, from_dirname)
+        rel_path = pathlib.PurePath(rel_path).as_posix()
+        return rel_path
 
     @staticmethod
     def _strip_prefix(text: str, prefix: str):
