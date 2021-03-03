@@ -16,7 +16,7 @@
 extern "C" {
 #endif
 
-/* typedefs */
+{% if self.typedefs() %}/* typedefs */{% endif %}
 {%- block typedefs %}
 {%- for function in env.functions %}
 {{ function.decl|typedef_from_decl(common.funcptr_type(function, ns))|c_from_typedef }};
