@@ -23,7 +23,7 @@ class Jinja2GeneratorBackend(GeneratorBackend):
         self._output_name_index = {x.name: x for x in self._outputs}  # type: {str: Output}
         self._j2_env = j2_env
         self._c_generator = c_generator.CGenerator()
-        self._include_paths = include_paths
+        self._include_paths = include_paths if include_paths is not None else []
 
     def _c_from_typedef(self, func_typedef):
         return self._c_generator.visit(func_typedef)
